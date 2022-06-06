@@ -1,1 +1,4 @@
-Repository containing simple_shell project.
+## Repository containing simple_shell project.
+
+### A peer project on ALX.
+
