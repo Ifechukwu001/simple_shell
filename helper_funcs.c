@@ -25,7 +25,7 @@ void execute_cmd(char *cmd, char **arg, char **env)
 	if (cmd == NULL)
 	{
 		printf("%s: No such file or directory\n", env[0]);
-		exit(EXIT_FAILURE);
+		return;
 	}
 
 	/* Fork to create child process */
