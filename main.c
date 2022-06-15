@@ -6,12 +6,12 @@
  * @av: NULL terminated array of strings.
  * Return: Always 0.
  */
-int main(int ac __attribute__((unused)), char *av[])
+int main(int ac __attribute__((unused)), char *av[] __attribute__((unused)))
 {
 	int is_running = 1, read_chars;
 	char *input_str = NULL;
 	size_t input_size = 0;
-	char **args, *envs[] = { NULL };
+	char **args, **envs = av;
 
 	while (is_running)
 	{
