@@ -6,10 +6,10 @@
  * @av: NULL terminated array of strings.
  * Return: Always 0.
  */
-int main(int ac __attribute__((unused)), char *av[] __attribute__((unused)))
+int main(int ac __attribute__((unused)), char *av[])
 {
 	int is_running = 1, read_chars;
-	char *input_str = NULL;
+	char *input_str = NULL, *cmd;
 	size_t input_size = 0;
 	char **args, **envs = av;
 
@@ -27,6 +27,12 @@ int main(int ac __attribute__((unused)), char *av[] __attribute__((unused)))
 		}
 		/* Tokenize the input string into arguments */
 		args = tokenize(input_str);
+		cmd = strtok(args[0], "/");
+		while (cmd)
+		{
+			args[0] = cmd;
+			cmd = strtok(NULL, "/");
+		}
 		/* Execute the inputed command */
 		execute_cmd(args[0], args, envs);
 	}
