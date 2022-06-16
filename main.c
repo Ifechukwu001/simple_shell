@@ -11,7 +11,8 @@ int main(int ac __attribute__((unused)), char *av[])
 	int is_running = 1, read_chars;
 	char *input_str = NULL, *cmd;
 	size_t input_size = 0;
-	char **args, **envs = av;
+	char **args, **envs = { NULL };
+	exec_vars data;
 
 	while (is_running)
 	{
@@ -36,7 +37,11 @@ int main(int ac __attribute__((unused)), char *av[])
 			cmd = strtok(NULL, "/");
 		}
 		/* Execute the inputed command */
-		execute_cmd(args[0], args, envs);
+		data.shell_call = av[0];
+		data.cmd = args[0];
+		data.args = args;
+		data.envs = envs;
+		execute_cmd(data);
 	}
 
 	return (0);
