@@ -27,6 +27,8 @@ int main(int ac __attribute__((unused)), char *av[])
 		}
 		/* Tokenize the input string into arguments */
 		args = tokenize(input_str);
+		if (!(args[0]))
+			continue;
 		cmd = strtok(args[0], "/");
 		while (cmd)
 		{

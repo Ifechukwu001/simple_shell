@@ -71,6 +71,19 @@ char **tokenize(char *string)
 	while (result)
 	{
 		result = strtok(NULL, " \n\t\r\a");
+		if (result)
+		{
+			switch (*result)
+			{
+			case ' ':
+			case '\n':
+			case '\t':
+			case '\r':
+			case '\a':
+				continue;
+				break;
+			}
+		}
 		i++;
 		arr_str[i] = result;
 	}
