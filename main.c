@@ -9,7 +9,7 @@
 int main(int ac __attribute__((unused)), char *av[])
 {
 	int is_running = 1, read_chars;
-	char *input_str = NULL;
+	char *input_str = NULL, *str_with_spc;
 	size_t input_size = 0;
 	char **args, **envs = { NULL };
 	exec_vars data;
@@ -26,8 +26,13 @@ int main(int ac __attribute__((unused)), char *av[])
 			is_running = 0;
 			continue;
 		}
+		str_with_spc = input_str;
+		while (*str_with_spc == ' ')
+			str_with_spc++;
+		str_with_spc = _strdup(str_with_spc);
+		free(input_str);
 		/* Tokenize the input string into arguments */
-		args = tokenize(input_str);
+		args = tokenize(str_with_spc);
 		if ((args[0]) == NULL)
 		{
 			free(args[0]);
