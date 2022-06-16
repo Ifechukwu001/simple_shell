@@ -21,7 +21,7 @@ path_l *create_pathlist(char **paths)
 		new = malloc(sizeof(path_l));
 		if (new == NULL)
 			return (0);
-		new->dir = strdup(paths[i]);
+		new->dir = _strdup(paths[i]);
 		new->next = NULL;
 		if (head == NULL)
 			head = new;
@@ -53,8 +53,8 @@ char *cmd_fullpath(char *cmd)
 
 	while (current)
 	{
-		strcpy(correct_path, current->dir);
-		len = strlen(current->dir);
+		_strcpy(correct_path, current->dir);
+		len = _strlen(current->dir);
 		correct_path[len] = '/';
 		len++;
 		for (i = 0; cmd[i] != '\0'; i++, len++)
@@ -89,7 +89,7 @@ char **path_ss(void)
 	if (path_value_cpy == NULL)
 		return (0);
 	path_value = getenv("PATH");
-	strcpy(path_value_cpy, path_value);
+	_strcpy(path_value_cpy, path_value);
 	current_path = path_value_cpy;
 	current_char = current_path;
 

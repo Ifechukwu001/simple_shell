@@ -1,9 +1,9 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -43,5 +43,8 @@ char **path_ss(void);
 
 /* Reengineered */
 char *_strtok(char *string, char *delim);
+int _strlen(char *s);
+char *_strdup(char *str);
+char *_strcpy(char *dest, const char *src);
 
 #endif /* MAIN_H */
