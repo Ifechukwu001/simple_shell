@@ -17,12 +17,17 @@ void print_prompt(void)
 void execute_cmd(exec_vars data)
 {
 	int childid, status;
+	static int warn_no = 1;
+	char original_cmd[10];
 
-	/* Changes the command to be the full path */
-	data.cmd = cmd_fullpath(data.cmd);
+	_strcpy(original_cmd, data.cmd);
+	if (data.cmd[0] != '/')
+		/* Changes the command to be the full path */
+		data.cmd = cmd_fullpath(data.cmd);
 	if (data.cmd == NULL)
 	{
-		printf("%s: No such file or directory\n", data.shell_call);
+		printf("%s: %d: %s: not found\n", data.shell_call, warn_no, original_cmd);
+		warn_no++;
 		return;
 	}
 

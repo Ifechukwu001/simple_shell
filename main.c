@@ -9,7 +9,7 @@
 int main(int ac __attribute__((unused)), char *av[])
 {
 	int is_running = 1, read_chars;
-	char *input_str = NULL, *cmd;
+	char *input_str = NULL;
 	size_t input_size = 0;
 	char **args, **envs = { NULL };
 	exec_vars data;
@@ -30,12 +30,7 @@ int main(int ac __attribute__((unused)), char *av[])
 		args = tokenize(input_str);
 		if (!(args[0]))
 			continue;
-		cmd = strtok(args[0], "/");
-		while (cmd)
-		{
-			args[0] = cmd;
-			cmd = strtok(NULL, "/");
-		}
+
 		/* Execute the inputed command */
 		data.shell_call = av[0];
 		data.cmd = args[0];
