@@ -304,8 +304,8 @@ $
 
 ## Authors :black_nib:
 
-- **Ifechukwu T. Ogidi** **||** [Github](https://github.com/Ifechukwu001) **||** [email](adeosundaniel33@gmail.com)
-- **Okorie Jude Ifeanyi** **||** [Github](https://github.com/JudetheGemini) **||** [email](jeomade19@gmail.com)
+- **Ifechukwu T. Ogidi** **||** [Github](https://github.com/Ifechukwu001) **||** [Email](ogidiifechukwu6@gmail.com)
+- **Okorie Jude Ifeanyi** **||** [Github](https://github.com/JudetheGemini) **||** [Email](jude58005@gmail.com)
 
 ## Acknowledgements :pray:
 
