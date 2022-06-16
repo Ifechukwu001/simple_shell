@@ -16,7 +16,7 @@ int main(int ac __attribute__((unused)), char *av[])
 
 	while (is_running)
 	{
-		if (isatty(STDOUT_FILENO))
+		if (isatty(STDIN_FILENO))
 			/* Displays the prompt */
 			print_prompt();
 		/* Get string from the stdin */
