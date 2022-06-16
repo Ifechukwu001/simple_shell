@@ -43,7 +43,8 @@ char *cmd_fullpath(char *cmd)
 {
 	path_l *head, *current;
 	char *correct_path, **paths;
-	int i, len;
+	int i;
+	size_t bufsize = 32, len;
 	struct stat stats;
 
 	paths = path_ss();
@@ -53,7 +54,12 @@ char *cmd_fullpath(char *cmd)
 	free(paths);
 
 	current = head;
-	correct_path = malloc(32 * sizeof(char));
+	correct_path = malloc(bufsize * sizeof(char));
+	if (correct_path == NULL)
+	{
+		free(cmd);
+		return (0);
+	}
 
 	while (current)
 	{
@@ -63,6 +69,11 @@ char *cmd_fullpath(char *cmd)
 		len++;
 		for (i = 0; cmd[i] != '\0'; i++, len++)
 		{
+			if (len == bufsize)
+			{
+				bufsize += 8;
+				correct_path = realloc(correct_path, bufsize);
+			}
 			correct_path[len] = cmd[i];
 		}
 
@@ -71,11 +82,13 @@ char *cmd_fullpath(char *cmd)
 		if (lstat(correct_path, &stats) == 0)
 		{
 			free_pathlist(&head);
+			free(cmd);
 			return (correct_path);
 		}
 
 		current = current->next;
 	}
+	free(cmd);
 	return (0);
 }
 
@@ -135,4 +148,42 @@ void free_pathlist(path_l **head)
 		free(temp->dir);
 		free(temp);
 	}
+}
+
+/**
+ * abs_currentpth - Gets th full path to an executable in the current program dir.
+ * @rel_path: Relative path to the executable.
+ * Return: Pointer to absolute path.
+ */
+char *abs_currentpth(char *rel_path)
+{
+	char cwd_path[256], *correct_path;
+	int i = 0;
+	size_t bufsize = 32, len;
+
+	correct_path = malloc(bufsize * sizeof(char));
+	if (correct_path == NULL)
+	{
+		free(rel_path);
+		return (0);
+	}
+	if (getcwd(cwd_path, sizeof(cwd_path)) == NULL)
+	{
+		free(rel_path);
+		return (0);
+	}
+
+	printf("%s\n", cwd_path);
+	_strcpy(correct_path, cwd_path);
+	len = _strlen(cwd_path);
+	for (i = 1; rel_path[i] != '\0'; i++, len++)
+	{
+		if (len == bufsize)
+			correct_path = realloc(correct_path, bufsize);
+		correct_path[len] = rel_path[i];
+	}
+	correct_path[len] = '\0';
+
+	free(rel_path);
+	return (correct_path);
 }

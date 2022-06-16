@@ -27,10 +27,14 @@ int main(int ac __attribute__((unused)), char *av[])
 			continue;
 		}
 		str_with_spc = input_str;
-		while (*str_with_spc == ' ')
+		while (*str_with_spc == ' ' || *str_with_spc == '\t')
 			str_with_spc++;
 		str_with_spc = _strdup(str_with_spc);
-		free(input_str);
+		if (input_str != NULL)
+		{
+			free(input_str);
+			input_str = NULL;
+		}
 		/* Tokenize the input string into arguments */
 		args = tokenize(str_with_spc);
 		if ((args[0]) == NULL)

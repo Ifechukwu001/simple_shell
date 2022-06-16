@@ -21,7 +21,10 @@ void execute_cmd(exec_vars data)
 	char original_cmd[10];
 
 	_strcpy(original_cmd, data.cmd);
-	if (data.cmd[0] != '/')
+	if (data.cmd[0] == '.')
+		/* Changes to full path of cwd. */
+		data.cmd = abs_currentpth(data.cmd);
+	else if (data.cmd[0] != '/')
 		/* Changes the command to be the full path */
 		data.cmd = cmd_fullpath(data.cmd);
 	if (data.cmd == NULL)
