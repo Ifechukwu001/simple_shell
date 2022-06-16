@@ -68,7 +68,7 @@ char *cmd_fullpath(char *cmd)
 
 		correct_path[len] = '\0';
 
-		if (stat(correct_path, &stats) == 0)
+		if (lstat(correct_path, &stats) == 0)
 		{
 			free_pathlist(&head);
 			return (correct_path);

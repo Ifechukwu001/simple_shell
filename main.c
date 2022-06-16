@@ -24,7 +24,6 @@ int main(int ac __attribute__((unused)), char *av[])
 		if (read_chars == -1) /* if there is an error */
 		{
 			is_running = 0;
-			putchar('\r');
 			continue;
 		}
 		/* Tokenize the input string into arguments */
