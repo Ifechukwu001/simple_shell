@@ -16,6 +16,15 @@ typedef struct path_t
 	struct path_t *next;
 } path_l;
 
+/* Argument structure */
+typedef struct
+{
+	char *shell_call;
+	char *cmd;
+	char **args;
+	char **envs;
+} exec_vars;
+
 /* Global variables */
 extern FILE *stdin;
 
@@ -23,7 +32,7 @@ extern FILE *stdin;
 /* Function Prototypes */
 
 /* Helper_functions */
-void execute_cmd(char *cmd, char **arg, char **env);
+void execute_cmd(exec_vars data);
 void print_prompt(void);
 char **tokenize(char *string);
 

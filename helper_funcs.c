@@ -11,20 +11,18 @@ void print_prompt(void)
 
 /**
  * execute_cmd - executes the command string passed to it.
- * @cmd: Command to be executed.
- * @arg: Arguments passed to the function.
- * @env: Enviroment variables passed to the function.
+ * @data: Structure containing all needed to execute a binary.
  * Return: Void.
  */
-void execute_cmd(char *cmd, char **arg, char **env)
+void execute_cmd(exec_vars data)
 {
 	int childid, status;
 
 	/* Changes the command to be the full path */
-	cmd = cmd_fullpath(cmd);
-	if (cmd == NULL)
+	data.cmd = cmd_fullpath(data.cmd);
+	if (data.cmd == NULL)
 	{
-		printf("%s: No such file or directory\n", env[0]);
+		printf("%s: No such file or directory\n", data.shell_call);
 		return;
 	}
 
@@ -33,7 +31,7 @@ void execute_cmd(char *cmd, char **arg, char **env)
 	if (childid == 0) /* if current process equals child process */
 	{
 		/* execute the command */
-		if (execve(cmd, arg, env) == -1)
+		if (execve(data.cmd, data.args, data.envs) == -1)
 		{
 			exit(EXIT_FAILURE);
 		}
@@ -43,7 +41,7 @@ void execute_cmd(char *cmd, char **arg, char **env)
 		/* This is the parent process */
 		wait(&status);
 		/* Free the malloc'd space assigned by getline */
-		free(cmd);
+		free(data.cmd);
 	}
 }
 
