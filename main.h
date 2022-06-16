@@ -10,7 +10,8 @@
 #include <sys/stat.h>
 
 /* Path list stucture */
-typedef struct path_t {
+typedef struct path_t
+{
 	char *dir;
 	struct path_t *next;
 } path_l;
@@ -25,8 +26,11 @@ extern FILE *stdin;
 void execute_cmd(char *cmd, char **arg, char **env);
 void print_prompt(void);
 char **tokenize(char *string);
+
+/* Path functions */
 path_l *create_pathlist(char **paths);
 char *cmd_fullpath(char *cmd);
+char **path_ss(void);
 
 /* Reengineered */
 char *_strtok(char *string, char *delim);
