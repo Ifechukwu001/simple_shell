@@ -16,14 +16,15 @@ int main(int ac __attribute__((unused)), char *av[])
 
 	while (is_running)
 	{
-		/* Displays the prompt */
-		print_prompt();
+		if (isatty(STDOUT_FILENO))
+			/* Displays the prompt */
+			print_prompt();
 		/* Get string from the stdin */
 		read_chars = getline(&input_str, &input_size, stdin);
 		if (read_chars == -1) /* if there is an error */
 		{
 			is_running = 0;
-			putchar('\n');
+			putchar('\r');
 			continue;
 		}
 		/* Tokenize the input string into arguments */
