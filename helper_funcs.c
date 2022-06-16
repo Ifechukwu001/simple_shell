@@ -28,25 +28,35 @@ void execute_cmd(exec_vars data)
 	{
 		printf("%s: %d: %s: not found\n", data.shell_call, warn_no, original_cmd);
 		warn_no++;
-		return;
-	}
-
-	/* Fork to create child process */
-	childid = fork();
-	if (childid == 0) /* if current process equals child process */
-	{
-		/* execute the command */
-		if (execve(data.cmd, data.args, data.envs) == -1)
-		{
-			exit(EXIT_FAILURE);
-		}
 	}
 	else
 	{
-		/* This is the parent process */
-		wait(&status);
-		/* Free the malloc'd space assigned by getline */
-		free(data.cmd);
+		/* Fork to create child process */
+		childid = fork();
+		if (childid == 0) /* if current process equals child process */
+		{
+			/* execute the command */
+			if (execve(data.cmd, data.args, data.envs) == -1)
+			{
+				printf("%s: %d: %s: not found\n",
+				       data.shell_call, warn_no, original_cmd);
+				warn_no++;
+				/* Free the malloc'd space assigned by getline */
+				if (data.cmd)
+					free(data.cmd);
+				if (data.args)
+					free(data.args);
+				exit(EXIT_FAILURE);
+			}
+		}
+		else
+		{
+			/* This is the parent process */
+			wait(&status);
+			/* Free the malloc'd space assigned by getline */
+			free(data.cmd);
+			free(data.args);
+		}
 	}
 }
 

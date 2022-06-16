@@ -48,6 +48,10 @@ char *cmd_fullpath(char *cmd)
 
 	paths = path_ss();
 	head = create_pathlist(paths);
+
+	free(paths[0]);
+	free(paths);
+
 	current = head;
 	correct_path = malloc(32 * sizeof(char));
 
@@ -65,7 +69,10 @@ char *cmd_fullpath(char *cmd)
 		correct_path[len] = '\0';
 
 		if (stat(correct_path, &stats) == 0)
+		{
+			free_pathlist(&head);
 			return (correct_path);
+		}
 
 		current = current->next;
 	}
@@ -109,4 +116,23 @@ char **path_ss(void)
 	paths[++i] = NULL;
 
 	return (paths);
+}
+
+/**
+ * free_pathlist - frees the space allocated to a pathlist.
+ * @head: Pointer to the List pointer (HEAD).
+ * Return: Void.
+ */
+void free_pathlist(path_l **head)
+{
+	path_l *current, *temp;
+
+	current = *head;
+	while (current)
+	{
+		temp = current;
+		current = current->next;
+		free(temp->dir);
+		free(temp);
+	}
 }

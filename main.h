@@ -40,6 +40,7 @@ char **tokenize(char *string);
 path_l *create_pathlist(char **paths);
 char *cmd_fullpath(char *cmd);
 char **path_ss(void);
+void free_pathlist(path_l **head);
 
 /* Reengineered */
 char *_strtok(char *string, char *delim);

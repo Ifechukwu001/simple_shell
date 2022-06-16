@@ -28,15 +28,20 @@ int main(int ac __attribute__((unused)), char *av[])
 		}
 		/* Tokenize the input string into arguments */
 		args = tokenize(input_str);
-		if (!(args[0]))
+		if ((args[0]) == NULL)
+		{
+			free(args[0]);
 			continue;
-
-		/* Execute the inputed command */
-		data.shell_call = av[0];
-		data.cmd = args[0];
-		data.args = args;
-		data.envs = envs;
-		execute_cmd(data);
+		}
+		else
+		{
+			/* Execute the inputed command */
+			data.shell_call = av[0];
+			data.cmd = args[0];
+			data.args = args;
+			data.envs = envs;
+			execute_cmd(data);
+		}
 	}
 
 	return (0);
