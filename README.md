@@ -304,8 +304,8 @@ $
 
 ## Authors :black_nib:
 
-- **Adeosun Daniel** **||** [Github](https://github.com/Mhi-sticks) **||** [email](adeosundaniel33@gmail.com)
-- **Oguntola Joshua** **||** [Github](https://github.com/ExtranoDev) **||** [email](jeomade19@gmail.com)
+- **Ifechukwu T. Ogidi** **||** [Github](https://github.com/Ifechukwu001) **||** [email](adeosundaniel33@gmail.com)
+- **Okorie Jude Ifeanyi** **||** [Github](https://github.com/JudetheGemini) **||** [email](jeomade19@gmail.com)
 
 ## Acknowledgements :pray:
 
